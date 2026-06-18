@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 
@@ -13,7 +13,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: any) {
-    // Yeh dynamic object return ho kar controller ke request handler me @GetUser() k pass jata ha
-    return { userId: payload.sub, email: payload.email };
+    // Yeh dynamic object return ho kar controller ke request handler me @GetUser() k pass jata ha 
+    return { id: payload.sub, email: payload.email };
   }
 }

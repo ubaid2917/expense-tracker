@@ -17,6 +17,9 @@ export class Transaction extends Document {
 
   @Prop({ required: true, default: Date.now })
   date: Date;
+
+  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  user: Types.ObjectId;
 }
 
 export const TransactionSchema = SchemaFactory.createForClass(Transaction);

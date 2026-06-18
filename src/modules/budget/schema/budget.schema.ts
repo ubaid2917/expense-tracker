@@ -14,8 +14,11 @@ export class Budget extends Document {
 
   @Prop({ required: true, default: 0 })
   plannedAmount: number;
+
+  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  user: Types.ObjectId;
 }
 
 export const BudgetSchema = SchemaFactory.createForClass(Budget);
 // Create a unique index
-BudgetSchema.index({ category: 1, month: 1, year: 1 }, { unique: true });
+BudgetSchema.index({ category: 1, month: 1, year: 1 , user: 1}, { unique: true });

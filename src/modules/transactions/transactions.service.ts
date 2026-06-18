@@ -11,17 +11,19 @@ export class TransactionsService {
     @InjectModel(Transaction.name) private transactionModel: Model<Transaction>,
   ) { }
 
-  async create(createTransactionDto: CreateTransactionDto): Promise<Transaction> {
+  async create(
+    createTransactionDto: CreateTransactionDto & { user: string },
+  ): Promise<Transaction> {
     const newTransaction = new this.transactionModel(createTransactionDto);
     return newTransaction.save();
   }
 
-  async findAll(filterDto: GetTransactionsFilterDto) {
+  async findAll(filterDto: GetTransactionsFilterDto, user: string) {
     const { page, limit, month, year } = filterDto;
     const skip = (page - 1) * limit;
 
     // Dynamic query building
-    const query: any = {};
+    const query: any = { user };
 
     if (month && year) {
       const startDate = new Date(year, month - 1, 1);
