@@ -5,6 +5,8 @@ import databaseConfig from './config/database.config';
 import { CategoriesModule } from './modules/categories/categories.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
 import { BudgetModule } from './modules/budget/budget.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { BudgetModule } from './modules/budget/budget.module';
     CategoriesModule,
     TransactionsModule,
     BudgetModule,
+    AuthModule,
+    UserModule,
   ],
 })
 export class AppModule {}

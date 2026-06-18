@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { BudgetService } from './budget.service';
 import { CreateBudgetDto } from './dto/create-budget.dto';
 import { UpdateBudgetDto } from './dto/update-budget.dto';
+import {GetBudgetReportDto} from './dto/get-budget.dto'
 
 @Controller('budget')
 export class BudgetController {
@@ -9,12 +10,12 @@ export class BudgetController {
 
   @Post()
   create(@Body() createBudgetDto: CreateBudgetDto) {
-    return this.budgetService.create(createBudgetDto);
+    return this.budgetService.setBudget(createBudgetDto);
   }
 
   @Get()
-  findAll() {
-    return this.budgetService.findAll();
+  findAll(@Query() getBudgetDto: GetBudgetReportDto) {
+    return this.budgetService.getReport(getBudgetDto);
   }
 
   @Get(':id')
