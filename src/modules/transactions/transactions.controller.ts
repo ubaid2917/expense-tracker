@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { TransactionsService } from './transactions.service';
 import { GetTransactionsFilterDto } from './dto/get-transactions-filter.dto';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
@@ -9,11 +9,12 @@ export class TransactionsController {
   constructor(private readonly transactionsService: TransactionsService) {}
 
   @Post() 
-  create(
+ async create(
     @Body() createTransactionDto: CreateTransactionDto,
     @GetUser() user,
   ) {
-    return this.transactionsService.create({ ...createTransactionDto, user: user.id });
+    const data = await this.transactionsService.create({ ...createTransactionDto, user: user.id });
+    return { success: true, message: 'Transaction created successfully', data };
   }
 
   @Get()
